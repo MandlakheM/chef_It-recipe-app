@@ -1,11 +1,22 @@
 import React from "react";
+import { useState } from "react";
 import "./nav.css";
+import SignUp from "../authentication/signUp/signUp";
 
 function nav() {
+  const [modal, setModal] = useState(false);
+
+  function activateModal() {
+    setModal(true);
+  }
+
+  function deactivateModal() {
+    setModal(false);
+  }
   return (
     <nav className="gutter">
       <div className="navContainer">
-        <div className="logo">CHEF IT</div>
+        <div className="logo">CHEF it</div>
         <div className="navLinks">
           <ul>
             <li>Home</li>
@@ -15,18 +26,19 @@ function nav() {
         </div>
 
         <div className="auth">
-          <div class="wrap-input-17">
-            <div class="search-box">
-              <button class="btn-search">🔍</button>
+          <div className="wrap-input-17">
+            <div className="search-box">
+              <button className="btn-search">🔍</button>
               <input
                 type="text"
-                class="input-search"
+                className="input-search"
                 placeholder="Type to Search..."
               />
             </div>
           </div>
-          <button>Sign In</button>
-          <button>Sign Up</button>
+          <button onClick={activateModal}>Sign In</button>
+          <button onClick={activateModal}>Sign Up</button>
+          {modal && <SignUp deactivateModal={deactivateModal} />}
         </div>
       </div>
     </nav>

@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "b4ff",
+      "username": "me@gmail.com",
+      "password": "thisisme"
+    },
+    {
+      "id": "86de",
+      "username": "admin@gmail.com",
+      "password": "123456789"
+    }
+  ],
+  "recipes": []
+}
