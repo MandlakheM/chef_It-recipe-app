@@ -1,0 +1,10 @@
+.gutter {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
