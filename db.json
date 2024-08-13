@@ -14,6 +14,11 @@
       "id": "f5ee",
       "username": "",
       "password": ""
+    },
+    {
+      "id": "3ded",
+      "username": "amu@gmail.com",
+      "password": "12345"
     }
   ],
   "recipes": [
@@ -26,6 +31,46 @@
       "preparationTime": "30min",
       "cookingTime": "30min",
       "servings": "4 people"
+    },
+    {
+      "id": "ea62",
+      "name": "kota",
+      "ingredients": "bread, potatoes, polony, russian,cheese",
+      "instructions": "just fry and add those stuff together",
+      "category": "junk",
+      "preparationTime": "16min",
+      "cookingTime": "10min",
+      "servings": "1"
+    },
+    {
+      "id": "e24e",
+      "name": "cup cakes",
+      "ingredients": "flour, eggs,sugar",
+      "instructions": "bake\nbake\nand bake\n",
+      "category": "dairy",
+      "preparationTime": "60min",
+      "cookingTime": "50min",
+      "servings": "3"
+    },
+    {
+      "id": "4bb7",
+      "name": "beef stew",
+      "ingredients": "rice, meat, salt and most importantly 6 gun",
+      "instructions": "boil rice\ncook meet\ndish up coz people are hungry",
+      "category": "dinner",
+      "preparationTime": "4hrs",
+      "cookingTime": "3hrs",
+      "servings": "4"
+    },
+    {
+      "id": "1e85",
+      "name": "",
+      "ingredients": "",
+      "instructions": "",
+      "category": "",
+      "preparationTime": "",
+      "cookingTime": "",
+      "servings": ""
     }
   ]
 }

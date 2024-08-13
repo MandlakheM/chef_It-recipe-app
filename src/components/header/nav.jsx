@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./nav.css";
 import SignUp from "../authentication/signUp/signUp";
 import SignIn from "../authentication/signIn/signIn";
+import { Link } from "react-router-dom";
 
 function nav() {
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
+  const [userToggle, setUserToggle] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      setUserToggle(false);
+    } else {
+      setUserToggle(true);
+    }
+  }, [userToggle]);
 
   function activateSignUpModal() {
     setSignUpModal(true);
@@ -23,17 +34,26 @@ function nav() {
   function deactivateSignInModal() {
     setSignInModal(false);
   }
+
   return (
     <nav className="gutter">
       <div className="navContainer">
         <div className="logo">CHEF it</div>
-        <div className="navLinks">
-          <ul>
-            <li>Home</li>
-            <li>Add Recipe</li>
-            <li>My Recipe's</li>
-          </ul>
-        </div>
+        {userToggle && (
+          <div className="navLinks">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/addRecipe">Add Recipe</Link>
+              </li>
+              <li>
+                <Link to="/myRecipes">My Recipe's</Link>
+              </li>
+            </ul>
+          </div>
+        )}
 
         <div className="auth">
           <div className="wrap-input-17">
@@ -47,7 +67,9 @@ function nav() {
             </div>
           </div>
           <button onClick={activateSignInModal}>Sign In</button>
-          {signInModal && <SignIn deactivateSignInModal={deactivateSignInModal}/>}
+          {signInModal && (
+            <SignIn deactivateSignInModal={deactivateSignInModal} />
+          )}
           <button onClick={activateSignUpModal}>Sign Up</button>
           {signUpModal && (
             <SignUp deactivateSignUpModal={deactivateSignUpModal} />
