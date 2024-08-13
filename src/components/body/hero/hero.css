@@ -39,3 +39,50 @@
   width: 100%;
   margin-top: 1.5rem;
 }
+
+@media(max-width:1024px){
+  .bodyText h2 {
+    font-size: 3rem;
+    font-weight: 400;
+  }
+}
+
+@media(max-width:770px){
+  .bodyText h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .bodyText p {
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width:530px){
+  .bodyText h2 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .bodyContainer{
+    height: 60vh;
+    margin-top: 0.2rem;
+
+  }
+}
+
+@media(max-width:425px){
+  .bodyText h2 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .bodyText p {
+    font-size: 0.5rem;
+  }
+
+  .bodyContainer{
+    height: 50vh;
+
+  }
+}

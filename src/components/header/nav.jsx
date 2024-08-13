@@ -4,11 +4,15 @@ import "./nav.css";
 import SignUp from "../authentication/signUp/signUp";
 import SignIn from "../authentication/signIn/signIn";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 function nav() {
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
   const [userToggle, setUserToggle] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -37,12 +41,13 @@ function nav() {
 
   function handleSignOut(){
     localStorage.removeItem("user")
+    navigate("/");
   }
 
   return (
     <nav className="gutter">
       <div className="navContainer">
-        <div className="logo">CHEF it</div>
+        <div className="logo">CHEF <span>it</span></div>
         {userToggle && (
           <div className="navLinks">
             <ul>

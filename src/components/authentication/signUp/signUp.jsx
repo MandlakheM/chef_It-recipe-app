@@ -10,12 +10,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ImCross } from "react-icons/im";
 // import TextField from '@mui/material/TextField';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignUp({deactivateSignUpModal}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
@@ -23,7 +23,7 @@ function SignUp({deactivateSignUpModal}) {
         username,
         password,
       });
-      //   navigate("/");
+        navigate("/");
     } catch (error) {
       console.error("Error during registration:", error);
     }

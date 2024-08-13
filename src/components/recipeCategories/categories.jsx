@@ -22,13 +22,21 @@ function categories() {
   return (
     <div className="gutter">
       <div className="catContainer">
-        <button className="breakfast">breakfast</button>
+        <div>
+          <button className="breakfast">breakfast</button>
+        </div>
         {/* <div className="breakfast"></div> */}
-        <button className="lunch">lunch</button>
+        <div>
+          <button className="lunch">lunch</button>
+        </div>
         {/* <div className="lunch"></div> */}
-        <button className="dinner">dinner</button>
+        <div>
+          <button className="dinner">dinner</button>
+        </div>
         {/* <div className="dinner"></div> */}
-        <button className="dessert">dessert</button>
+        <div>
+          <button className="dessert">dessert</button>
+        </div>
         {/* <div className="dessert"></div> */}
       </div>
       <div className="cardContainer">

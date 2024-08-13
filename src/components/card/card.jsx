@@ -60,7 +60,7 @@ export default function RecipeReviewCard({ recipes }) {
   return (
     <>
       {recipes.map((recipe) => (
-        <Card sx={{ maxWidth: 345 }} key={recipe.id}>
+        <Card sx={{ minWidth: 350, maxWidth:350 }} key={recipe.id}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: yellow[700] }} aria-label="recipe">
@@ -80,7 +80,7 @@ export default function RecipeReviewCard({ recipes }) {
           )}
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              {recipe.instructions}
+              {/* {recipe.instructions} */}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
