@@ -35,6 +35,10 @@ function nav() {
     setSignInModal(false);
   }
 
+  function handleSignOut(){
+    localStorage.removeItem("user")
+  }
+
   return (
     <nav className="gutter">
       <div className="navContainer">
@@ -66,11 +70,20 @@ function nav() {
               />
             </div>
           </div>
-          <button onClick={activateSignInModal}>Sign In</button>
+          {userToggle && (
+            <button className="authbtn " onClick={handleSignOut}>
+              Sign Out
+            </button>
+          )}
+          <button className="authbtn " onClick={activateSignInModal}>
+            Sign In
+          </button>
           {signInModal && (
             <SignIn deactivateSignInModal={deactivateSignInModal} />
           )}
-          <button onClick={activateSignUpModal}>Sign Up</button>
+          <button className="authbtn " onClick={activateSignUpModal}>
+            Sign Up
+          </button>
           {signUpModal && (
             <SignUp deactivateSignUpModal={deactivateSignUpModal} />
           )}

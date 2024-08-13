@@ -14,7 +14,7 @@ function MyRecipe() {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (!user) {
-      navigate("/home");
+      navigate("/");
     } else {
       fetchRecipes();
     }
