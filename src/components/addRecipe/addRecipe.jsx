@@ -20,6 +20,18 @@ function AddRecipe({ fetchRecipes }) {
   const [preparationTime, setPreparationTime] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [servings, setServings] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleAddRecipe = async () => {
     try {
@@ -31,8 +43,8 @@ function AddRecipe({ fetchRecipes }) {
         preparationTime,
         cookingTime,
         servings,
+        image,
       });
-      //   fetchRecipes();
     } catch (error) {
       console.error("Error adding recipe:", error);
     }
@@ -99,7 +111,7 @@ function AddRecipe({ fetchRecipes }) {
                     <TextField
                       required
                       fullWidth
-                      name="password"
+                      name="preparationTime"
                       label="Preparation Time"
                       id="preparationTime"
                       value={preparationTime}
@@ -110,7 +122,7 @@ function AddRecipe({ fetchRecipes }) {
                     <TextField
                       required
                       fullWidth
-                      name="password"
+                      name="cookingTime"
                       label="Cooking Time"
                       id="cookingTime"
                       value={cookingTime}
@@ -121,14 +133,20 @@ function AddRecipe({ fetchRecipes }) {
                     <TextField
                       required
                       fullWidth
-                      name="password"
+                      name="servings"
                       label="Servings"
                       id="servings"
                       value={servings}
                       onChange={(e) => setServings(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={12}></Grid>
+                  <Grid item xs={12}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
+                  </Grid>
                 </Grid>
                 <Button
                   type="submit"
