@@ -9,7 +9,23 @@
       "id": "86de",
       "username": "admin@gmail.com",
       "password": "123456789"
+    },
+    {
+      "id": "f5ee",
+      "username": "",
+      "password": ""
     }
   ],
-  "recipes": []
+  "recipes": [
+    {
+      "id": "fb2a",
+      "name": "pap",
+      "ingredients": "maize meal, water",
+      "instructions": "boil water, add maize meal once water is boiled, stir and mix together with a wooden spoon, and let it m=simmer for 30 min",
+      "category": "traditional",
+      "preparationTime": "30min",
+      "cookingTime": "30min",
+      "servings": "4 people"
+    }
+  ]
 }

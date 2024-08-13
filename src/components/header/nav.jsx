@@ -2,16 +2,26 @@ import React from "react";
 import { useState } from "react";
 import "./nav.css";
 import SignUp from "../authentication/signUp/signUp";
+import SignIn from "../authentication/signIn/signIn";
 
 function nav() {
-  const [modal, setModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
+  const [signInModal, setSignInModal] = useState(false);
 
-  function activateModal() {
-    setModal(true);
+  function activateSignUpModal() {
+    setSignUpModal(true);
   }
 
-  function deactivateModal() {
-    setModal(false);
+  function activateSignInModal() {
+    setSignInModal(true);
+  }
+
+  function deactivateSignUpModal() {
+    setSignUpModal(false);
+  }
+
+  function deactivateSignInModal() {
+    setSignInModal(false);
   }
   return (
     <nav className="gutter">
@@ -36,9 +46,12 @@ function nav() {
               />
             </div>
           </div>
-          <button onClick={activateModal}>Sign In</button>
-          <button onClick={activateModal}>Sign Up</button>
-          {modal && <SignUp deactivateModal={deactivateModal} />}
+          <button onClick={activateSignInModal}>Sign In</button>
+          {signInModal && <SignIn deactivateSignInModal={deactivateSignInModal}/>}
+          <button onClick={activateSignUpModal}>Sign Up</button>
+          {signUpModal && (
+            <SignUp deactivateSignUpModal={deactivateSignUpModal} />
+          )}
         </div>
       </div>
     </nav>

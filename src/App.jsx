@@ -1,16 +1,23 @@
 import "./App.css";
 import { useState } from "react";
-import Nav from "./components/header/nav";
-import Hero from "./components/body/hero/hero";
-import Categories from "./components/body/recipeCategories/categories";
+import Home from "./components/layout/home";
 import SignUp from "./components/authentication/signUp/signUp";
+import SignIn from "./components/authentication/signIn/signIn";
+import AddRecipe from "./components/addRecipe/addRecipe";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Nav />
-      <Hero/>
-      {/* <Categories/> */}
+      {/* <Home/> */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<SignIn/>} />
+          <Route path="/k" element={<SignUp/>} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
+      <AddRecipe/>
     </>
   );
 }

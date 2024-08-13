@@ -4,7 +4,7 @@ import axios from "axios";
 // import TextField from '@mui/material/TextField';
 // import { useNavigate } from "react-router-dom";
 
-function SignUp({deactivateModal}) {
+function SignUp({deactivateSignUpModal}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function SignUp({deactivateModal}) {
 
   return (
     <div className="overlay">
-      <div className="modal" onClick={()=>deactivateModal()}></div>
+      <div className="modal" onClick={()=>deactivateSignUpModal()}></div>
       <div className="modalContent">
         <h2>Sign Up</h2>
         {/* <TextField label="Outlined" variant="outlined" /> */}
@@ -41,7 +41,7 @@ function SignUp({deactivateModal}) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button onClick={handleRegister}>Sign Up</button>
-        <button className="closeModal" onClick={()=>deactivateModal()}>Close</button>
+        <button className="closeModal" onClick={()=>deactivateSignUpModal()}>Close</button>
       </div>
     </div>
   );
