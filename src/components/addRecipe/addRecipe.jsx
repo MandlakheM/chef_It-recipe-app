@@ -1,18 +1,19 @@
-import "./addRecipe.css";
-import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "../header/nav";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-// import { TextareaAutosize } from "@mui/material/TextareaAutosize";
 
 function AddRecipe({ fetchRecipes }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
@@ -21,6 +22,31 @@ function AddRecipe({ fetchRecipes }) {
   const [cookingTime, setCookingTime] = useState("");
   const [servings, setServings] = useState("");
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (id) {
+      const fetchRecipe = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3030/recipes/${id}`
+          );
+          const recipe = response.data;
+          setName(recipe.name || "");
+          setIngredients(recipe.ingredients || "");
+          setInstructions(recipe.instructions || "");
+          setCategory(recipe.category || "");
+          setPreparationTime(recipe.preparationTime || "");
+          setCookingTime(recipe.cookingTime || "");
+          setServings(recipe.servings || "");
+          setImage(recipe.image || null);
+        } catch (error) {
+          console.error("Error fetching recipe details:", error);
+        }
+      };
+      fetchRecipe();
+    }
+  }, [id]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -33,20 +59,48 @@ function AddRecipe({ fetchRecipes }) {
     }
   };
 
-  const handleAddRecipe = async () => {
-    try {
-      await axios.post("http://localhost:3030/recipes", {
-        name,
-        ingredients,
-        instructions,
-        category,
-        preparationTime,
-        cookingTime,
-        servings,
-        image,
-      });
-    } catch (error) {
-      console.error("Error adding recipe:", error);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (
+      name.trim() &&
+      ingredients.trim() &&
+      instructions.trim() &&
+      category.trim() &&
+      preparationTime.trim() &&
+      cookingTime.trim() &&
+      servings.trim() !== ""
+    ) {
+      try {
+        if (id) {
+          await axios.put(`http://localhost:3030/recipes/${id}`, {
+            name,
+            ingredients,
+            instructions,
+            category,
+            preparationTime,
+            cookingTime,
+            servings,
+            image,
+          });
+        } else {
+          await axios.post("http://localhost:3030/recipes", {
+            name,
+            ingredients,
+            instructions,
+            category,
+            preparationTime,
+            cookingTime,
+            servings,
+            image,
+          });
+        }
+        navigate("/");
+      } catch (error) {
+        console.error("Error saving recipe:", error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -65,9 +119,14 @@ function AddRecipe({ fetchRecipes }) {
               }}
             >
               <Typography component="h1" variant="h5">
-                Add your recipe below
+                {id ? "Edit your recipe" : "Add your recipe"}{" "}
               </Typography>
-              <Box component="form" noValidate sx={{ mt: 3 }}>
+              <Box
+                component="form"
+                noValidate
+                sx={{ mt: 3 }}
+                onSubmit={handleSubmit}
+              >
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -153,60 +212,14 @@ function AddRecipe({ fetchRecipes }) {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={handleAddRecipe}
+                  disabled={loading}
                 >
-                  ADD RECIPE
+                  {id ? "Update Recipe" : "Add Recipe"}{" "}
                 </Button>
                 <Grid container justifyContent="flex-end"></Grid>
               </Box>
             </Box>
           </Container>
-          {/* <div className="formContainer">
-            <h5>Add Recipe</h5>
-            <input
-              type="text"
-              placeholder="Recipe Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Ingredients"
-              value={ingredients}
-              onChange={(e) => setIngredients(e.target.value)}
-            />
-            <textarea
-              placeholder="Instructions"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-            />
-            <input type="file" name="" id="" />
-            <input
-              type="text"
-              placeholder="Category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Preparation Time"
-              value={preparationTime}
-              onChange={(e) => setPreparationTime(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Cooking Time"
-              value={cookingTime}
-              onChange={(e) => setCookingTime(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Servings"
-              value={servings}
-              onChange={(e) => setServings(e.target.value)}
-            />
-            <button onClick={handleAddRecipe}>Add Recipe</button>
-          </div> */}
         </div>
       </div>
     </>

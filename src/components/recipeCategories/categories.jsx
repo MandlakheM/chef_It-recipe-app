@@ -4,6 +4,7 @@ import "./categories.css";
 import axios from "axios";
 import RecipeReviewCard from "../card/card";
 
+
 function categories() {
   const [recipes, setRecipes] = useState([]);
 

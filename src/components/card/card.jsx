@@ -16,6 +16,8 @@ import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -31,6 +33,8 @@ const ExpandMore = styled((props) => {
 export default function RecipeReviewCard({ recipes }) {
   const [expanded, setExpanded] = useState(false);
   const [userToggle, setUserToggle] = useState(false);
+  const navigate = useNavigate(); 
+
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -49,11 +53,12 @@ export default function RecipeReviewCard({ recipes }) {
     }
   };
 
-  const handleEditRecipe = () => {
-    console.log("Edit recipe");
+  const handleEditRecipe = (recipeId) => {
+    navigate(`/addRecipe/${recipeId}`); 
   };
 
   const handleExpandClick = () => {
+    
     setExpanded(!expanded);
   };
 
@@ -94,7 +99,7 @@ export default function RecipeReviewCard({ recipes }) {
                 </IconButton>
                 <IconButton
                   aria-label="edit"
-                  onClick={handleEditRecipe}
+                  onClick={()=> handleEditRecipe(recipe.id)}
                 >
                   <EditNoteIcon />
                 </IconButton>
