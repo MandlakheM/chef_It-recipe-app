@@ -18,7 +18,6 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -33,8 +32,7 @@ const ExpandMore = styled((props) => {
 export default function RecipeReviewCard({ recipes }) {
   const [expanded, setExpanded] = useState(false);
   const [userToggle, setUserToggle] = useState(false);
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -54,18 +52,17 @@ export default function RecipeReviewCard({ recipes }) {
   };
 
   const handleEditRecipe = (recipeId) => {
-    navigate(`/addRecipe/${recipeId}`); 
+    navigate(`/addRecipe/${recipeId}`);
   };
 
   const handleExpandClick = () => {
-    
     setExpanded(!expanded);
   };
 
   return (
     <>
       {recipes.map((recipe) => (
-        <Card sx={{ minWidth: 350, maxWidth:350 }} key={recipe.id}>
+        <Card sx={{ minWidth: 350, maxWidth: 350 }} key={recipe.id}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: yellow[700] }} aria-label="recipe">
@@ -79,13 +76,22 @@ export default function RecipeReviewCard({ recipes }) {
             <CardMedia
               component="img"
               height="194"
-              image={recipe.image} 
+              image={recipe.image}
               alt={recipe.name}
             />
           )}
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               {/* {recipe.instructions} */}
+              <p>
+                prepation time: <b>{recipe.preparationTime}</b>
+              </p>
+              <p>
+                cooking time: <b>{recipe.cookingTime}</b>
+              </p>
+              <p>
+                serving: <b>{recipe.servings}</b>
+              </p>
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
@@ -99,7 +105,7 @@ export default function RecipeReviewCard({ recipes }) {
                 </IconButton>
                 <IconButton
                   aria-label="edit"
-                  onClick={()=> handleEditRecipe(recipe.id)}
+                  onClick={() => handleEditRecipe(recipe.id)}
                 >
                   <EditNoteIcon />
                 </IconButton>
@@ -116,6 +122,10 @@ export default function RecipeReviewCard({ recipes }) {
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
+                <p><b>Ingredients</b></p>
+              <Typography paragraph>{recipe.ingredients}</Typography>
+              <br />
+              <p><b>Instructions</b></p>
               <Typography paragraph>{recipe.instructions}</Typography>
             </CardContent>
           </Collapse>
