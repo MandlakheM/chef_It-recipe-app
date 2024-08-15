@@ -49,6 +49,11 @@
 
 }
 
+.catHeadings{
+    text-align: center;
+    color: orange;
+}
+
 @media(max-width:770px){
     .catContainer{
         overflow: scroll;
