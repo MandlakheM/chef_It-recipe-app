@@ -11,6 +11,8 @@ import Container from "@mui/material/Container";
 import { ImCross } from "react-icons/im";
 // import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 function SignUp({ deactivateSignUpModal }) {
   const [username, setUsername] = useState("");
@@ -24,9 +26,11 @@ function SignUp({ deactivateSignUpModal }) {
           username,
           password,
         });
+        toast.success("Sign Up Successful");
         navigate("/");
       } catch (error) {
-        console.error("Error during registration:", error);
+        toast.error("Error during registration:", error);
+        console.error();
       }
     }
   };

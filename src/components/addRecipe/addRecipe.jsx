@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import "./addRecipe.css"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "../header/nav";
@@ -9,6 +10,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
+import { toast } from "react-toastify";
+
 
 function AddRecipe({ fetchRecipes }) {
   const { id } = useParams();
@@ -41,7 +44,7 @@ function AddRecipe({ fetchRecipes }) {
           setServings(recipe.servings || "");
           setImage(recipe.image || null);
         } catch (error) {
-          console.error("Error fetching recipe details:", error);
+          toast.error("Error fetching recipe details:", error)
         }
       };
       fetchRecipe();
@@ -95,9 +98,10 @@ function AddRecipe({ fetchRecipes }) {
             image,
           });
         }
-        navigate("/");
+        toast.success("Recipe Added");
+        navigate("/myRecipes");
       } catch (error) {
-        console.error("Error saving recipe:", error);
+        toast.error("Error saving recipe:", error)
       } finally {
         setLoading(false);
       }
@@ -151,6 +155,7 @@ function AddRecipe({ fetchRecipes }) {
                   </Grid>
                   <Grid item xs={12}>
                     <textarea
+                      id="textArea"
                       placeholder="Instructions"
                       value={instructions}
                       onChange={(e) => setInstructions(e.target.value)}
@@ -214,7 +219,7 @@ function AddRecipe({ fetchRecipes }) {
                   sx={{ mt: 3, mb: 2 }}
                   disabled={loading}
                 >
-                  {id ? "Update Recipe" : "Add Recipe"}{" "}
+                  {id ? "Update Recipe" : "Add Recipe"}
                 </Button>
                 <Grid container justifyContent="flex-end"></Grid>
               </Box>

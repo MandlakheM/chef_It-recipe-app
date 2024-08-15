@@ -5,6 +5,8 @@ import SignUp from "../authentication/signUp/signUp";
 import SignIn from "../authentication/signIn/signIn";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 
 function nav() {
@@ -12,7 +14,6 @@ function nav() {
   const [signInModal, setSignInModal] = useState(false);
   const [userToggle, setUserToggle] = useState(false);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -39,15 +40,19 @@ function nav() {
     setSignInModal(false);
   }
 
-  function handleSignOut(){
-    localStorage.removeItem("user")
+  function handleSignOut() {
+    localStorage.removeItem("user");
+    toast.success("You have signed out");
+    setUserToggle(false);
     navigate("/");
   }
 
   return (
     <nav className="gutter">
       <div className="navContainer">
-        <div className="logo">CHEF <span>it</span></div>
+        <div className="logo">
+          CHEF <span>it</span>
+        </div>
         {userToggle && (
           <div className="navLinks">
             <ul>
@@ -65,32 +70,25 @@ function nav() {
         )}
 
         <div className="auth">
-          <div className="wrap-input-17">
-            <div className="search-box">
-              <button className="btn-search">🔍</button>
-              <input
-                type="text"
-                className="input-search"
-                placeholder="Type to Search..."
-              />
-            </div>
-          </div>
-          {userToggle && (
-            <button className="authbtn " onClick={handleSignOut}>
+          {userToggle ? (
+            <button className="authbtn" onClick={handleSignOut}>
               Sign Out
             </button>
-          )}
-          <button className="authbtn " onClick={activateSignInModal}>
-            Sign In
-          </button>
-          {signInModal && (
-            <SignIn deactivateSignInModal={deactivateSignInModal} />
-          )}
-          <button className="authbtn " onClick={activateSignUpModal}>
-            Sign Up
-          </button>
-          {signUpModal && (
-            <SignUp deactivateSignUpModal={deactivateSignUpModal} />
+          ) : (
+            <>
+              <button className="authbtn" onClick={activateSignInModal}>
+                Sign In
+              </button>
+              {signInModal && (
+                <SignIn deactivateSignInModal={deactivateSignInModal} />
+              )}
+              <button className="authbtn" onClick={activateSignUpModal}>
+                Sign Up
+              </button>
+              {signUpModal && (
+                <SignUp deactivateSignUpModal={deactivateSignUpModal} />
+              )}
+            </>
           )}
         </div>
       </div>

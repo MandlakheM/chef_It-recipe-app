@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ImCross } from "react-icons/im"; 
+import { toast } from "react-toastify";
 
 function SignIn({ deactivateSignInModal }) {
   const [username, setUsername] = useState("");
@@ -22,12 +23,13 @@ function SignIn({ deactivateSignInModal }) {
         );
         if (response.data.length > 0) {
           localStorage.setItem("user", JSON.stringify(response.data[0]));
+          toast.success("Sign In successful");
           // navigate("/home");
         } else {
-          alert("Invalid credentials");
+          toast.error("Invalid credentials");
         }
       } catch (error) {
-        console.error("Error during login:", error);
+        toast.error("Error during login: " + error)
       }
     }
   };

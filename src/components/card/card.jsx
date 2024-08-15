@@ -17,6 +17,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -46,8 +48,10 @@ export default function RecipeReviewCard({ recipes }) {
   const handleDeleteRecipe = async (recipeId) => {
     try {
       await axios.delete(`http://localhost:3030/recipes/${recipeId}`);
+      toast.success("Recipe Deleted");
+
     } catch (error) {
-      console.error("Error deleting recipe:", error);
+        toast.error("Error deleting recipe:", error)
     }
   };
 
@@ -122,10 +126,14 @@ export default function RecipeReviewCard({ recipes }) {
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-                <p><b>Ingredients</b></p>
+              <Typography variant="p">
+                <b>Ingredients</b>
+              </Typography>
               <Typography paragraph>{recipe.ingredients}</Typography>
               <br />
-              <p><b>Instructions</b></p>
+              <Typography variant="p">
+                <b>Instructions</b>
+              </Typography>
               <Typography paragraph>{recipe.instructions}</Typography>
             </CardContent>
           </Collapse>

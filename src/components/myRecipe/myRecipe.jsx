@@ -6,6 +6,8 @@ import axios from "axios";
 import FetchRecipe from "./fetchRecipe";
 import { useNavigate } from "react-router-dom";
 import RecipeReviewCard from "../card/card";
+import { toast } from "react-toastify";
+
 
 function MyRecipe() {
   const [recipes, setRecipes] = useState([]);
@@ -25,7 +27,7 @@ function MyRecipe() {
       const response = await axios.get("http://localhost:3030/recipes");
       setRecipes(response.data);
     } catch (error) {
-      console.error("Error fetching recipes:", error);
+        toast.error("Error fetching recipes:", error)
     }
   };
 

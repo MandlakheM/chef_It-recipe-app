@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import "./categories.css";
 import axios from "axios";
 import RecipeReviewCard from "../card/card";
+import { toast } from "react-toastify";
 
 
 function categories() {
   const [recipes, setRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   useEffect(() => {
     fetchHeroRecipes();
@@ -16,36 +18,51 @@ function categories() {
     try {
       const response = await axios.get("http://localhost:3030/recipes");
       setRecipes(response.data);
+      setFilteredRecipes(response.data); 
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
   };
+
+  const handleCategoryClick = (category) => {
+    const filtered = recipes.filter((recipe) => recipe.category === category);
+    setFilteredRecipes(filtered);
+  };
+
   return (
     <div className="gutter">
       <div className="catContainer">
-        <div mx-4 my-4  >
-          <button className="breakfast"></button>
+        <div>
+          <button
+            className="breakfast"
+            onClick={() => handleCategoryClick("breakfast")}
+          ></button>
           <p className="catHeadings">Breakfast</p>
         </div>
-        {/* <div className="breakfast"></div> */}
         <div>
-          <button className="lunch"></button>
+          <button
+            className="lunch"
+            onClick={() => handleCategoryClick("lunch")}
+          ></button>
           <p className="catHeadings">Lunch</p>
         </div>
-        {/* <div className="lunch"></div> */}
         <div>
-          <button className="dinner"></button>
+          <button
+            className="dinner"
+            onClick={() => handleCategoryClick("dinner")}
+          ></button>
           <p className="catHeadings">Dinner</p>
         </div>
-        {/* <div className="dinner"></div> */}
         <div>
-          <button className="dessert"></button>
+          <button
+            className="dessert"
+            onClick={() => handleCategoryClick("dessert")}
+          ></button>
           <p className="catHeadings">Dessert</p>
         </div>
-        {/* <div className="dessert"></div> */}
       </div>
       <div className="cardContainer">
-        <RecipeReviewCard recipes={recipes} />
+        <RecipeReviewCard recipes={filteredRecipes} />
       </div>
     </div>
   );
