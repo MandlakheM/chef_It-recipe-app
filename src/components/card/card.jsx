@@ -19,7 +19,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -32,7 +31,8 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard({ recipes }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expandedState, setExpandedState] = useState({});
+  const [expandedId, setExpandedId] = useState(null);
   const [userToggle, setUserToggle] = useState(false);
   const navigate = useNavigate();
 
@@ -49,9 +49,8 @@ export default function RecipeReviewCard({ recipes }) {
     try {
       await axios.delete(`http://localhost:3030/recipes/${recipeId}`);
       toast.success("Recipe Deleted");
-
     } catch (error) {
-        toast.error("Error deleting recipe:", error)
+      toast.error("Error deleting recipe:", error);
     }
   };
 
@@ -59,8 +58,13 @@ export default function RecipeReviewCard({ recipes }) {
     navigate(`/addRecipe/${recipeId}`);
   };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = (id) => {
+    setExpandedId(expandedId === id ? null : id);
+
+    setExpandedState((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
   };
 
   return (
@@ -116,15 +120,15 @@ export default function RecipeReviewCard({ recipes }) {
               </div>
             )}
             <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
+              expand={expandedState[recipe.id] || false}
+              onClick={() => handleExpandClick(recipe.id)}
+              aria-expanded={expandedState[recipe.id] || false}
               aria-label="show more"
             >
               <ExpandMoreIcon />
             </ExpandMore>
           </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Collapse in={expandedId === recipe.id} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography variant="p">
                 <b>Ingredients</b>
