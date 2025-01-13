@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./MyRecipe.css";
+import "./myRecipe.css";
 import Nav from "../header/nav";
 
 import axios from "axios";
