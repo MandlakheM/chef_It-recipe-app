@@ -19,8 +19,9 @@ function SignIn({ deactivateSignInModal }) {
     if (username.trim() && password.trim() !== "") {
       try {
         const response = await axios.get(
-          `http://localhost:3030/users?username=${username}&password=${password}`
+          `https://chef-it-recipe-app2.onrender.com/users?username=${username}&password=${password}`
         );
+        console.log(response)
         if (response.data.length > 0) {
           localStorage.setItem("user", JSON.stringify(response.data[0]));
           toast.success("Sign In successful");

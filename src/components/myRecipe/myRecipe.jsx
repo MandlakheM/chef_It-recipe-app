@@ -24,7 +24,7 @@ function MyRecipe() {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get("http://localhost:3030/recipes");
+      const response = await axios.get("https://chef-it-recipe-app2.onrender.com/recipes");
       setRecipes(response.data);
     } catch (error) {
         toast.error("Error fetching recipes:", error)

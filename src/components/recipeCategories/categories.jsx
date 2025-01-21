@@ -16,7 +16,7 @@ function categories() {
 
   const fetchHeroRecipes = async () => {
     try {
-      const response = await axios.get("http://localhost:3030/recipes");
+      const response = await axios.get("https://chef-it-recipe-app2.onrender.com/recipes");
       setRecipes(response.data);
       setFilteredRecipes(response.data); 
     } catch (error) {

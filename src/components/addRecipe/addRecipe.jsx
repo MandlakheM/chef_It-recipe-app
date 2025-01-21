@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import "./addRecipe.css"
+import "./addRecipe.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "../header/nav";
@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { toast } from "react-toastify";
-
 
 function AddRecipe({ fetchRecipes }) {
   const { id } = useParams();
@@ -32,7 +31,7 @@ function AddRecipe({ fetchRecipes }) {
       const fetchRecipe = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3030/recipes/${id}`
+            `https://chef-it-recipe-app2.onrender.com/recipes/${id}`
           );
           const recipe = response.data;
           setName(recipe.name || "");
@@ -44,7 +43,7 @@ function AddRecipe({ fetchRecipes }) {
           setServings(recipe.servings || "");
           setImage(recipe.image || null);
         } catch (error) {
-          toast.error("Error fetching recipe details:", error)
+          toast.error("Error fetching recipe details:", error);
         }
       };
       fetchRecipe();
@@ -76,18 +75,21 @@ function AddRecipe({ fetchRecipes }) {
     ) {
       try {
         if (id) {
-          await axios.put(`http://localhost:3030/recipes/${id}`, {
-            name,
-            ingredients,
-            instructions,
-            category,
-            preparationTime,
-            cookingTime,
-            servings,
-            image,
-          });
+          await axios.put(
+            `https://chef-it-recipe-app2.onrender.com/recipes/${id}`,
+            {
+              name,
+              ingredients,
+              instructions,
+              category,
+              preparationTime,
+              cookingTime,
+              servings,
+              image,
+            }
+          );
         } else {
-          await axios.post("http://localhost:3030/recipes", {
+          await axios.post("https://chef-it-recipe-app2.onrender.com/recipes", {
             name,
             ingredients,
             instructions,
@@ -101,7 +103,7 @@ function AddRecipe({ fetchRecipes }) {
         toast.success("Recipe Added");
         navigate("/myRecipes");
       } catch (error) {
-        toast.error("Error saving recipe:", error)
+        toast.error("Error saving recipe:", error);
       } finally {
         setLoading(false);
       }
