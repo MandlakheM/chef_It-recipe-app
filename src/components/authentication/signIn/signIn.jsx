@@ -18,7 +18,7 @@ function SignIn({ deactivateSignInModal }) {
   const handleSubmit = async () => {
     if (username.trim() && password.trim() !== "") {
       try {
-        const response = await axios.get(
+        const response = await axios.post(
           `https://chef-it-recipe-app2.onrender.com/users?username=${username}&password=${password}`
         );
         console.log(response)
