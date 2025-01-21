@@ -34,8 +34,7 @@ vii) The app uses JSON-Server to store data.
 
 ## SCREENSHOTS
 
-![Screenshot 2024-09-10 093037](https://github.com/user-attachments/assets/177c8dde-aa99-4866-a8f4-049642b3fc4b)
-
+![Image](https://github.com/user-attachments/assets/873b5fa2-df37-4e73-b6f4-ff9ae41648c3)
 
 
 ## Installation 
@@ -56,9 +55,7 @@ cd projectname
 
 npm install
 
-# Start the JSON-server on your CMD
+# Start the JSON-server and development server concurrently on your CMD
 
-json-server --watch db.json --port 3030
-
-npm run dev
+npm run start
 
