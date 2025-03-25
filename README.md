@@ -30,8 +30,9 @@ vi) Users can categories to classify recipes (e.g., Breakfast, Lunch, Dinner).
 
 vii) The app uses JSON-Server to store data.
 
-**SUMMARY**
+## Live site
 
+https://chef-it-recipe-app-ui.onrender.com/
 
 ## SCREENSHOTS
 
