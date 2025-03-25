@@ -22,7 +22,7 @@ function SignUp({ deactivateSignUpModal }) {
   const handleRegister = async () => {
     if (username.trim() && password.trim() !== "") {
       try {
-        await axios.post("https://chef-it-recipe-app2.onrender.com/users", {
+        await axios.post("https://chef-it-recipe-app-3.onrender.com/users", {
           username,
           password,
         });

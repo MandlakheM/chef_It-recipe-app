@@ -47,7 +47,7 @@ export default function RecipeReviewCard({ recipes }) {
 
   const handleDeleteRecipe = async (recipeId) => {
     try {
-      await axios.delete(`https://chef-it-recipe-app2.onrender.com/recipes/${recipeId}`);
+      await axios.delete(`https://chef-it-recipe-app-3.onrender.com/recipes/${recipeId}`);
       toast.success("Recipe Deleted");
     } catch (error) {
       toast.error("Error deleting recipe:", error);

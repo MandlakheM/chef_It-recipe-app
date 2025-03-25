@@ -31,7 +31,7 @@ function AddRecipe({ fetchRecipes }) {
       const fetchRecipe = async () => {
         try {
           const response = await axios.get(
-            `https://chef-it-recipe-app2.onrender.com/recipes/${id}`
+            `https://chef-it-recipe-app-3.onrender.com/recipes/${id}`
           );
           const recipe = response.data;
           setName(recipe.name || "");
@@ -76,7 +76,7 @@ function AddRecipe({ fetchRecipes }) {
       try {
         if (id) {
           await axios.put(
-            `https://chef-it-recipe-app2.onrender.com/recipes/${id}`,
+            `https://chef-it-recipe-app-3.onrender.com/recipes/${id}`,
             {
               name,
               ingredients,
@@ -89,7 +89,7 @@ function AddRecipe({ fetchRecipes }) {
             }
           );
         } else {
-          await axios.post("https://chef-it-recipe-app2.onrender.com/recipes", {
+          await axios.post("https://chef-it-recipe-app-3.onrender.com/recipes", {
             name,
             ingredients,
             instructions,
